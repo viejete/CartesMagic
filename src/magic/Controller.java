@@ -3,7 +3,10 @@ package magic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 public class Controller {
     public AnchorPane apMainPane;
@@ -11,7 +14,7 @@ public class Controller {
 
     public void initialize(){
         ObservableList<String> names = FXCollections.observableArrayList(
-                "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+                "Julia", "Ian");
         lvLlistaCartes.setItems(names);
 
         // Handle ListView selection changes.
