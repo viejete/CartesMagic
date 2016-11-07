@@ -47,8 +47,8 @@ public class Controller {
 
 
     static class Person {
-        String name;
-        String img;
+        private String name;
+        private String img;
 
         public Person(String name, String img) {
             this.name = name;
