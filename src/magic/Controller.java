@@ -46,7 +46,7 @@ public class Controller {
     }
 
 
-    class Person {
+    static class Person {
         String name;
         String img;
 
