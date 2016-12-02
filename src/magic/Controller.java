@@ -4,25 +4,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+
 public class Controller {
     public AnchorPane apMainPane;
-    public ListView<Person> lvLlistaCartes;
+    public ListView<Card> lvLlistaCartes;
+    public ArrayList<Card> cartes;
+    public ImageView ivCartes;
 
-    public void initialize(){
+    public void initialize() throws MalformedURLException {
+
+        cartes = CardsAPI.getAllCards();
 
         // Personalitzem la CellFactory
         lvLlistaCartes.setCellFactory((list) -> {
-            return new ListCell<Person>() {
+            return new ListCell<Card>() {
                 @Override
-                public void updateItem(Person item, boolean empty) {
+                public void updateItem(Card item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        setGraphic(new ImageView(item.getImg()));
+                        Image image = new Image(item.getImageUrl() , 75 , 75 , true , true , true);
+                        setGraphic(new ImageView(image));
                         setText(item.getName());
                     }
                 }
@@ -30,17 +39,17 @@ public class Controller {
         });
 
         // Afegir llista observable d'items
-        ObservableList<Person> persons = FXCollections.observableArrayList(
-                new Person("Julia", "icon.png"), new Person("Greta", "icon.png"));
-        lvLlistaCartes.setItems(persons);
+        ObservableList<Card> cards = FXCollections.observableArrayList(cartes);
+        lvLlistaCartes.setItems(cards);
 
         // Afegir un item
-        lvLlistaCartes.getItems().add(new Person("Pepi", "icon.png"));
+        //lvLlistaCartes.getItems().add(new Person("Pepi", "icon.png"));
 
         // Handle ListView selection changes with a listener
         lvLlistaCartes.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                System.out.println("ListView Selection Changed (selected: " + newValue.getName() + ")");
+                    Image image = new Image(newValue.getImageUrl());
+                    ivCartes.setImage(image);
             }
         );
     }
