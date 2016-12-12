@@ -18,10 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.example.carlos.magiccards.databinding.FragmentMainBinding;
-
-import java.util.ArrayList;
-
 
 public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
